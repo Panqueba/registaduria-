@@ -1,0 +1,11 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<tns:cambiarContrasenaResponse xmlns:hdr="http://xmlns.mindefensa.gov.co/xsd/Headers/v1" xmlns:tns="http://www.www.mindefensa.gov.co/xsd/Operacion/CambiarContrasena/V1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.www.mindefensa.gov.co/xsd/Operacion/CambiarContrasena/V1.0 file:/C:/JDeveloper/mywork/RNEC/EXP_RegistraduriaNacional/EXP_WSConsulta/Resources/Schemas/PS_CambiarContrasenaV1.0.xsd">
+   <tns:return>
+      <tns:estadoCambioClave>
+         <tns:numeroControl>1000</tns:numeroControl>
+         <tns:codError>codError2</tns:codError>
+         <tns:descripcionError>descripcionError3</tns:descripcionError>
+         <tns:fechaHoraConsulta>fechaHoraConsulta4</tns:fechaHoraConsulta>
+      </tns:estadoCambioClave>
+   </tns:return>
+</tns:cambiarContrasenaResponse>

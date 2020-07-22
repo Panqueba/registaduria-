@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="http://www.www.mindefensa.gov.co/xsd/Operacion/CambiarContrasena/V1.0"
+            xmlns:hdr="http://xmlns.mindefensa.gov.co/xsd/Headers/v1"
+            targetNamespace="http://www.www.mindefensa.gov.co/xsd/Operacion/CambiarContrasena/V1.0"
+            elementFormDefault="qualified">
+  <xsd:import namespace="http://xmlns.mindefensa.gov.co/xsd/Headers/v1"
+              schemaLocation="../../../../CommonResources/Resources/Schemas/Headers.xsd"/>
+  <xsd:element name="headerRequest" type="hdr:HeaderRequest"/>
+  <xsd:element name="headerResponse" type="hdr:HeaderResponse"/>
+  <xsd:element name="cambiarContrasenaRequest" type="cambiarContrasenaRequest">
+    <xsd:annotation>
+      <xsd:documentation>A sample element</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="cambiarContrasenaResponse" type="cambiarContrasenaResponse"/>
+  <xsd:complexType name="cambiarContrasenaRequest">
+    <xsd:sequence>
+      <xsd:element name="cambioClaveRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="nuevaClave" type="xsd:string"/>
+            <xsd:element name="confirmarNuevaClave" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="cambiarContrasenaResponse">
+    <xsd:sequence>
+      <xsd:element name="return">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="estadoCambioClave">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="numeroControl" type="xsd:string"/>
+                  <xsd:element name="codError" type="xsd:string"/>
+                  <xsd:element name="descripcionError" type="xsd:string"/>
+                  <xsd:element name="fechaHoraConsulta" type="xsd:string"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

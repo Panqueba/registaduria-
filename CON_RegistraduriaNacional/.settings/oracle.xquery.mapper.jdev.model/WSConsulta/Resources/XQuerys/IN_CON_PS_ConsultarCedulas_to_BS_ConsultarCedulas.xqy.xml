@@ -1,0 +1,6 @@
+<view_states>
+   <function arity="1" name="func_ConsultarCedulas">
+      <source_tree_view last.visible.row="4" last.visible.path="/sourceRoot[[0]]/consultarCedulas[[0]]/usuario[[3]]" first.visible.path="/sourceRoot[[0]]/consultarCedulas[[0]]" expanded.paths="/sourceRoot[[0]]/consultarCedulas[[0]]" first.visible.row="0" selected.paths=""/>
+      <target_tree_view last.visible.row="1" last.visible.path="/TargetRoot[[0]]/consultarCedulas[[0]]/nuip[[0]]" first.visible.path="/TargetRoot[[0]]/consultarCedulas[[0]]" expanded.paths="/TargetRoot[[0]]/consultarCedulas[[0]]" first.visible.row="0" selected.paths=""/>
+   </function>
+</view_states>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="http://www.www.mindefensa.gov.co/wsdl/Servicio/WSConsulta/V1.0"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:coc="http://www.www.mindefensa.gov.co/xsd/Operacion/ConsultarCedulas/V1.0"
+             xmlns:cmc="http://www.www.mindefensa.gov.co/xsd/Operacion/CambiarContrasena/V1.0"
+             xmlns:tns="http://www.www.mindefensa.gov.co/wsdl/Servicio/WSConsulta/V1.0"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xsd:schema targetNamespace="http://www.www.mindefensa.gov.co/wsdl/Servicio/WSConsulta/V1.0/types"
+                elementFormDefault="qualified">
+      <xsd:import schemaLocation="../Schemas/PS_ConsultarCedulasV1.0.xsd"
+                  namespace="http://www.www.mindefensa.gov.co/xsd/Operacion/ConsultarCedulas/V1.0"/>
+      <xsd:import namespace="http://www.www.mindefensa.gov.co/xsd/Operacion/CambiarContrasena/V1.0"
+                  schemaLocation="../Schemas/PS_CambiarContrasenaV1.0.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="ConsultaCedulasRequest">
+    <part name="consultarCedulas" element="coc:consultarCedulasRequest"/>
+    <part name="headerRequest" element="coc:headerRequest"/>
+  </message>
+  <message name="ConsultaCedulasResponse">
+    <part name="consultaCedulasResponse" element="coc:consultarCedulasResponse"/>
+    <part name="headerResponse" element="coc:headerResponse"/>
+  </message>
+  <message name="CambiarContrasenaRequest">
+    <part name="cambiarContrasena" element="cmc:cambiarContrasenaRequest"/>
+    <part name="headerRequest" element="cmc:headerRequest"/>
+  </message>
+  <message name="CambiarContrasenaResponse">
+    <part name="cambiarContrasenaResponse" element="cmc:cambiarContrasenaResponse"/>
+    <part name="headerResponse" element="cmc:headerResponse"/>
+  </message>
+  <portType name="WSConsultaInterface">
+    <operation name="ConsutaCedulas">
+      <input message="tns:ConsultaCedulasRequest"/>
+      <output message="tns:ConsultaCedulasResponse"/>
+    </operation>
+    <operation name="CambiarContrasena">
+      <input message="tns:CambiarContrasenaRequest"/>
+      <output message="tns:CambiarContrasenaResponse"/>
+    </operation>
+  </portType>
+  <binding name="WSConsultaSoapBinding" type="tns:WSConsultaInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="ConsutaCedulas">
+      <soap:operation style="document"
+                      soapAction="http://www.www.mindefensa.gov.co/wsdl/Servicio/WSConsulta/V1.0/ConsutaCedulas"/>
+      <input>
+        <soap:body use="literal" parts="consultarCedulas"/>
+        <soap:header use="literal" message="tns:ConsultaCedulasRequest" part="headerRequest"/>
+      </input>
+      <output>
+        <soap:body use="literal" parts="consultaCedulasResponse"/>
+        <soap:header use="literal" message="tns:ConsultaCedulasResponse" part="headerResponse"/>
+      </output>
+    </operation>
+    <operation name="CambiarContrasena">
+      <soap:operation style="document"
+                      soapAction="http://www.www.mindefensa.gov.co/wsdl/Servicio/WSConsulta/V1.0/CambiarContrasena"/>
+      <input>
+        <soap:body use="literal" parts="cambiarContrasena"/>
+        <soap:header use="literal" message="tns:CambiarContrasenaRequest" part="headerRequest"/>
+      </input>
+      <output>
+        <soap:body use="literal" parts="cambiarContrasenaResponse"/>
+        <soap:header use="literal" message="tns:CambiarContrasenaResponse" part="headerResponse"/>
+      </output>
+    </operation>
+  </binding>
+</definitions>

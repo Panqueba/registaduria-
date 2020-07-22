@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="http://www.www.mindefensa.gov.co/wsdl/CON/Servicio/ConsultarCedulas/V1.0"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:ccs="http://www.www.mindefensa.gov.co/xsd/CON/Operacion/ConsultarCedulas/V1.0"
+             xmlns:tns="http://www.www.mindefensa.gov.co/wsdl/CON/Servicio/ConsultarCedulas/V1.0"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xsd:schema targetNamespace="http://www.www.mindefensa.gov.co/wsdl/CON/Servicio/ConsultarCedulas/V1.0/types"
+                elementFormDefault="qualified">
+      <xsd:import namespace="http://www.www.mindefensa.gov.co/xsd/CON/Operacion/ConsultarCedulas/V1.0"
+                  schemaLocation="../../../WSConsulta/Resources/Schemas/PS_CON_ConsultarCedulaV1.0.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="ConsultarCedulas">
+    <part name="consultarCedulas" element="ccs:consultarCedulasRequest"/>
+  </message>
+  <message name="ConsultarCedulasResponse">
+    <part name="consultarCedulasResponse" element="ccs:consultarCedulasResponse"/>
+  </message>
+  <portType name="ConsultarCedulasInterface">
+    <operation name="ConsutarCedulas">
+      <input message="tns:ConsultarCedulas"/>
+      <output message="tns:ConsultarCedulasResponse"/>
+    </operation>
+  </portType>
+  <binding name="ConsultarCedulasSoapBinding" type="tns:ConsultarCedulasInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="ConsutarCedulas">
+      <soap:operation style="document"
+                      soapAction="http://www.www.mindefensa.gov.co/wsdl/CON/Servicio/ConsultarCedulas/V1.0/ConsutarCedulas"/>
+      <input>
+        <soap:body use="literal" parts="consultarCedulas"/>
+      </input>
+      <output>
+        <soap:body use="literal" parts="consultarCedulasResponse"/>
+      </output>
+    </operation>
+  </binding>
+</definitions>

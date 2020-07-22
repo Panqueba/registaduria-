@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:templateEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config">
+    <con:coreEntry/>
+    <con:router errorHandler="error-a6ff2d6.614a82d0.0.17189ccde4b.N7762">
+        <con:pipeline type="request" name="request-a6ff2d6.614a82d0.0.17189ccde4b.N7889">
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N7887" name="stg_Initial">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="dateInitial">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N7882</con2:id>
+                        <con2:locked>true</con2:locked>
+                        <con1:expr>
+                            <con2:xqueryText>fn:current-dateTime()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="requestPayload">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N787f</con2:id>
+                        <con2:locked>true</con2:locked>
+                        <con1:expr>
+                            <con2:xqueryText>$body/*</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="headerPayload">
+                        <con2:id>_ActionId-N3f57fff5.N7e9e6bdc.0.172a1d4b020.N7fb1</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$header/*</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="serviceName">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N6bff</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>'Service_Name'</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="tableName">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N6c02</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>'TABLE_NAME'</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con:placeholder-node id="PlaceholderID_N3f57fff5.N7361ae74.0.171ea978972.N7e55"/>
+                </con:actions>
+            </con:stage>
+            <con:placeholder-node id="PlaceholderID_N3f57fff5.N7e9e6bdc.0.172a1d4b020.N8000" name="stg_Token"/>
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N771e" name="stg_Assign_Request">
+                <con:context/>
+                <con:actions>
+                    <con:placeholder-node id="PlaceholderID_a6ff2d6.614a82d0.0.17189ccde4b.N786b"/>
+                    <con1:replace varName="body">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N753c</con2:id>
+                        <con1:location>
+                            <con2:xpathText>./*</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>''</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-a6ff2d6.614a82d0.0.17189ccde4b.N7888">
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N7886" name="stg_Response">
+                <con:context/>
+                <con:actions>
+                    <con:placeholder-node id="PlaceholderID_a6ff2d6.614a82d0.0.17189ccde4b.N7842"/>
+                    <con1:replace varName="body">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N783f</con2:id>
+                        <con1:location>
+                            <con2:xpathText>./*</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>""</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                    <con1:replace varName="header">
+                        <con2:id>_ActionId-N3f57fff5.N7e9e6bdc.0.172a1d4b020.N7fae</con2:id>
+                        <con1:location>
+                            <con2:xpathText>./*</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>''</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N783d" name="stg_Audit">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.amx.com/Schema/EXAMPLE/PROJECT_NAME/V1.0"/>
+                </con:context>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N7839</con2:id>
+                        <con3:service ref="CON_Auditoria/BusinessService/BS_RegistrarAuditoria_DB_v1.0" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>BS_RegistrarAuditoria</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body">
+                                <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N7836</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>./*</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="CON_Auditoria/Resources/XQuerys/IN_RegistrarAuditoria_BS_v1.0"/>
+                                        <con2:param name="SERVICE_NAME">
+                                            <con2:path>fn:data($serviceName)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TABLE_NAME">
+                                            <con2:path>fn:data($tableName)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="DATE_INI">
+                                            <con2:path>$dateInitial</con2:path>
+                                        </con2:param>
+                                        <con2:param name="MESSAGE">
+                                            <con2:path>if(fn:data($body//*:headerResponse/*:statusCode) = 'OK')
+then fn:concat('EXITOSO - ', fn:data($serviceName))
+else if(fn:data($body//*:headerResponse/*:statusCode) = 'WR')
+then fn:concat('ADVENTENCIA - ', fn:data($serviceName))
+else fn:concat('FALLIDO - ', fn:data($serviceName))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="CHANNEL">
+                                            <con2:path>fn:data($headerPayload//*:headerRequest/*:sistemaOrigen)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="REQUEST">
+                                            <con2:path>fn-bea:serialize(fn:concat($headerPayload,$requestPayload))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="OPERATION_NAME">
+                                            <con2:path>fn:data($operation)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="LEVEL_LOG">
+                                            <con2:path>'INFO'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="RESPONSE">
+                                            <con2:path>fn-bea:serialize(fn:concat($header/*,$body/*))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="LOG_ID">
+                                            <con2:path>0</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TRANSACTION_ID">
+                                            <con2:path>fn:data($headerPayload//*:headerRequest/*:idTransaccion)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="DATE_END">
+                                            <con2:path>fn:current-dateTime()</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a6ff2d6.614a82d0.0.17189ccde4b.N7762">
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N7761" name="stg_Response_Error">
+                <con:context/>
+                <con:actions>
+                    <con:placeholder-node id="PlaceholderID_N3f57fff5.N7361ae74.0.171ea978972.N7e57"/>
+                    <con1:replace varName="body">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N775e</con2:id>
+                        <con1:location>
+                            <con2:xpathText>./*</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat('&lt;',fn:string(fn:prefix-from-QName(fn:node-name($requestPayload/*))),':',fn:data($operation),'Rs/>')</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                    <con1:replace varName="header">
+                        <con2:id>_ActionId-N3f57fff5.N7e9e6bdc.0.172a1d4b020.N7f42</con2:id>
+                        <con1:location>
+                            <con2:xpathText>./*</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>''</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N775d" name="stg_Audit_Error">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.amx.com/Schema/EXAMPLE/PROJECT_NAME/V1.0"/>
+                </con:context>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N775a</con2:id>
+                        <con3:service ref="CON_Auditoria/BusinessService/BS_RegistrarAuditoria_DB_v1.0" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>BS_RegistrarAuditoria</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body">
+                                <con2:id>_ActionId-N3f57fff5.N7e9e6bdc.0.172a1d4b020.N7f45</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>./*</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="CON_Auditoria/Resources/XQuerys/IN_RegistrarAuditoria_BS_v1.0"/>
+                                        <con2:param name="SERVICE_NAME">
+                                            <con2:path>fn:data($serviceName)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TABLE_NAME">
+                                            <con2:path>fn:data($tableName)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="DATE_INI">
+                                            <con2:path>$dateInitial</con2:path>
+                                        </con2:param>
+                                        <con2:param name="MESSAGE">
+                                            <con2:path>fn:concat('FALLIDO - ', fn:data($serviceName))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="CHANNEL">
+                                            <con2:path>fn:data($headerPayload//*:headerRequest/*:sistemaOrigen)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="REQUEST">
+                                            <con2:path>fn-bea:serialize(fn:concat($headerRequest,$requestPayload))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="OPERATION_NAME">
+                                            <con2:path>fn:data($operation)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="LEVEL_LOG">
+                                            <con2:path>'ERROR'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="RESPONSE">
+                                            <con2:path>fn-bea:serialize(fn:concat($header/*,$body/*))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="LOG_ID">
+                                            <con2:path>0</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TRANSACTION_ID">
+                                            <con2:path>fn:data($headerPayload//*:headerRequest/*:idTransaccion)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="DATE_END">
+                                            <con2:path>fn:current-dateTime()</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N7722" name="stg_Reply_Error">
+                <con:context/>
+                <con:actions>
+                    <con2:reply isError="false">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N771f</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-a6ff2d6.614a82d0.0.17189ccde4b.N76eb">
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N7682" name="stg_Response_Error">
+                <con:context/>
+                <con:actions>
+                    <con:placeholder-node id="PlaceholderID_N3f57fff5.N7361ae74.0.171ea978972.N7e56"/>
+                    <con1:replace varName="body">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N7681</con2:id>
+                        <con1:location>
+                            <con2:xpathText>./*</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat('&lt;',fn:string(fn:prefix-from-QName(fn:node-name($requestPayload/*))),':',fn:data($operation),'Rs/>')</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                    <con1:replace varName="header">
+                        <con2:id>_ActionId-N3f57fff5.N7e9e6bdc.0.172a1d4b020.N7f40</con2:id>
+                        <con1:location>
+                            <con2:xpathText>./*</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>''</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N75e3" name="stg_Audit">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.amx.com/Schema/EXAMPLE/PROJECT_NAME/V1.0"/>
+                </con:context>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N75e2</con2:id>
+                        <con3:service ref="CON_Auditoria/BusinessService/BS_RegistrarAuditoria_DB_v1.0" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>BS_RegistrarAuditoria</con3:operation>
+                        <con3:outboundTransform>
+                            <con1:replace varName="body">
+                                <con2:id>_ActionId-N3f57fff5.N7e9e6bdc.0.172a1d4b020.N7f79</con2:id>
+                                <con1:location>
+                                    <con2:xpathText>./*</con2:xpathText>
+                                </con1:location>
+                                <con1:expr>
+                                    <con2:xqueryTransform>
+                                        <con2:resource ref="CON_Auditoria/Resources/XQuerys/IN_RegistrarAuditoria_BS_v1.0"/>
+                                        <con2:param name="SERVICE_NAME">
+                                            <con2:path>fn:data($serviceName)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TABLE_NAME">
+                                            <con2:path>fn:data($tableName)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="DATE_INI">
+                                            <con2:path>$dateInitial</con2:path>
+                                        </con2:param>
+                                        <con2:param name="MESSAGE">
+                                            <con2:path>fn:concat('FALLIDO - ', fn:data($serviceName))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="CHANNEL">
+                                            <con2:path>fn:data($headerPayload//*:headerRequest/*:sistemaOrigen)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="REQUEST">
+                                            <con2:path>fn-bea:serialize(fn:concat($headerRequest,$requestPayload))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="OPERATION_NAME">
+                                            <con2:path>fn:data($operation)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="LEVEL_LOG">
+                                            <con2:path>'ERROR'</con2:path>
+                                        </con2:param>
+                                        <con2:param name="RESPONSE">
+                                            <con2:path>fn-bea:serialize(fn:concat($header/*,$body/*))</con2:path>
+                                        </con2:param>
+                                        <con2:param name="LOG_ID">
+                                            <con2:path>0</con2:path>
+                                        </con2:param>
+                                        <con2:param name="TRANSACTION_ID">
+                                            <con2:path>fn:data($headerPayload//*:headerRequest/*:idTransaccion)</con2:path>
+                                        </con2:param>
+                                        <con2:param name="DATE_END">
+                                            <con2:path>fn:current-dateTime()</con2:path>
+                                        </con2:param>
+                                    </con2:xqueryTransform>
+                                </con1:expr>
+                            </con1:replace>
+                        </con3:outboundTransform>
+                    </con3:route>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-a6ff2d6.614a82d0.0.17189ccde4b.N7579" name="stg_Reply">
+                <con:context/>
+                <con:actions>
+                    <con2:reply isError="false">
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N7578</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="PPN_CON">
+                <con:request>request-a6ff2d6.614a82d0.0.17189ccde4b.N7889</con:request>
+                <con:response>response-a6ff2d6.614a82d0.0.17189ccde4b.N7888</con:response>
+            </con:pipeline-node>
+            <con:route-node id="_RouteId-a6ff2d6.614a82d0.0.17189ccde4b.N7885" name="CON_Route_Node" error-handler="error-a6ff2d6.614a82d0.0.17189ccde4b.N76eb">
+                <con:context/>
+                <con:actions>
+                    <con4:route>
+                        <con2:id>_ActionId-a6ff2d6.614a82d0.0.17189ccde4b.N7541</con2:id>
+                        <con4:outboundTransform>
+                            <con:placeholder-node id="PlaceholderID_a6ff2d6.614a82d0.0.17189ccde4b.N7540"/>
+                        </con4:outboundTransform>
+                        <con4:responseTransform>
+                            <con:placeholder-node id="PlaceholderID_a6ff2d6.614a82d0.0.17189ccde4b.N753f"/>
+                        </con4:responseTransform>
+                    </con4:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:templateEntry>

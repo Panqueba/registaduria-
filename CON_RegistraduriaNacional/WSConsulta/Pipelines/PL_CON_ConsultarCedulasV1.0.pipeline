@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="CON_RegistraduriaNacional/WSConsulta/Resources/WSDLs/PS_CON_ConsultarCedulasV1.0"/>
+            <con:binding>
+                <con:name>ConsultarCedulasSoapBinding</con:name>
+                <con:namespace>http://www.www.mindefensa.gov.co/wsdl/CON/Servicio/ConsultarCedulas/V1.0</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router errorHandler="error-N53efad85.N42261052.0.17347194f4b.N7fcb">
+        <con:pipeline type="request" name="request-N3f57fffc.N70e37b49.0.17344999327.N7f0a">
+            <con:stage id="_StageId-N3f57fffc.N70e37b49.0.17344999327.N7f08" name="stg_Initial">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.www.mindefensa.gov.co/xsd/CON/Operacion/ConsultarCedulas/V1.0"/>
+                </con:context>
+                <con:actions>
+                    <con1:assign varName="dateInitial">
+                        <con2:id>_ActionId-N3f57fffc.N70e37b49.0.17344999327.N7f04</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>fn:current-dateTime()</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="requestPayload">
+                        <con2:id>_ActionId-N3f57fffc.N70e37b49.0.17344999327.N7f01</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/*</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="headerPayload">
+                        <con2:id>_ActionId-N3f57fffc.N70e37b49.0.17344999327.N7efe</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$header/*</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="serviceName">
+                        <con2:id>_ActionId-N3f57fffc.N70e37b49.0.17344999327.N7efb</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>'WSconsulta'</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="tableName">
+                        <con2:id>_ActionId-N3f57fffc.N70e37b49.0.17344999327.N7ef8</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>'TABLE_NAME'</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="usuario">
+                        <con2:id>_ActionId-N3f57fffc.7bf67810.0.17347b0133b.N7dd6</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/v1:consultarCedulasRequest/v1:usuario</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="contrasena">
+                        <con2:id>_ActionId-N3f57fffc.7bf67810.0.17347b0133b.N7dd0</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/v1:consultarCedulasRequest/v1:contrasena</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:assign varName="ip">
+                        <con2:id>_ActionId-N3f57fffc.7bf67810.0.17347b0133b.N7dd3</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$body/v1:consultarCedulasRequest/v1:ip</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:validate>
+                        <con2:id>_ActionId-N3f57fffc.N70e37b49.0.17344999327.N7e5e</con2:id>
+                        <con1:schema ref="CON_RegistraduriaNacional/WSConsulta/Resources/Schemas/PS_CON_ConsultarCedulaV1.0"/>
+                        <con1:schemaElement xmlns:v1="http://www.www.mindefensa.gov.co/xsd/CON/Operacion/ConsultarCedulas/V1.0">v1:consultarCedulasRequest</con1:schemaElement>
+                        <con1:varName>body</con1:varName>
+                        <con1:location>
+                            <con2:xpathText>$body/v1:consultarCedulasRequest</con2:xpathText>
+                        </con1:location>
+                    </con1:validate>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N53efad85.N6763dbb0.0.173469d86d5.N7ffe" name="stg_Assign_Request">
+                <con:context>
+                    <con2:userNsDecl prefix="soapenv" namespace="http://schemas.xmlsoap.org/soap/envelope/"/>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.www.mindefensa.gov.co/xsd/CON/Operacion/ConsultarCedulas/V1.0"/>
+                </con:context>
+                <con:actions>
+                    <con1:replace varName="header">
+                        <con2:id>_ActionId-N3f57fffc.7bf67810.0.17347b0133b.N7dcd</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText><![CDATA[<soapenv:Header>
+      <ws:usuario>{data($usuario)}</ws:usuario>
+      <ws:contrasena>{data($contrasena)}</ws:contrasena>
+      <ws:ip>{data($ip)}</ws:ip>
+</soapenv:Header>]]></con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53efad85.N6763dbb0.0.173469d86d5.N7ffd</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xsltTransform>
+                                <con2:resource ref="CON_RegistraduriaNacional/WSConsulta/Resources/XSLTs/IN_CON_PS_ConsultarCedulas_to_BS_ConsultarCedulas"/>
+                                <con2:input>$body/*</con2:input>
+                            </con2:xsltTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N3f57fffc.N70e37b49.0.17344999327.N7f09">
+            <con:stage id="_StageId-N3f57fffc.N70e37b49.0.17344999327.N7f07" name="stg_Assign_Response">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.www.mindefensa.gov.co/xsd/CON/Operacion/ConsultarCedulas/V1.0"/>
+                </con:context>
+                <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53efad85.N6763dbb0.0.173469d86d5.N7ff5</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xsltTransform>
+                                <con2:resource ref="CON_RegistraduriaNacional/WSConsulta/Resources/XSLTs/OUT_CON_BS_ConsultarCedulasResponse_to_PS_ConsultarCedulasResponse"/>
+                                <con2:input>$body/*</con2:input>
+                            </con2:xsltTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N53efad85.N42261052.0.17347194f4b.N7ffe" name="stg_validate">
+                <con:context>
+                    <con2:userNsDecl prefix="v1" namespace="http://www.www.mindefensa.gov.co/xsd/CON/Operacion/ConsultarCedulas/V1.0"/>
+                </con:context>
+                <con:disabled>true</con:disabled>
+                <con:actions>
+                    <con1:validate>
+                        <con2:id>_ActionId-N53efad85.N42261052.0.17347194f4b.N7ffd</con2:id>
+                        <con1:schema ref="CON_RegistraduriaNacional/WSConsulta/Resources/Schemas/PS_CON_ConsultarCedulaV1.0"/>
+                        <con1:schemaElement xmlns:v1="http://www.www.mindefensa.gov.co/xsd/CON/Operacion/ConsultarCedulas/V1.0">v1:consultarCedulasResponse</con1:schemaElement>
+                        <con1:varName>body</con1:varName>
+                        <con1:location>
+                            <con2:xpathText>$body/v1:consultarCedulasResponse</con2:xpathText>
+                        </con1:location>
+                    </con1:validate>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="error" name="error-N53efad85.N42261052.0.17347194f4b.N7fcb">
+            <con:stage id="_StageId-N53efad85.N42261052.0.17347194f4b.N7fca" name="stg_Response_Error">
+                <con:context/>
+                <con:actions>
+                    <con1:replace varName="body">
+                        <con2:id>_ActionId-N53efad85.N42261052.0.17347194f4b.N7fc7</con2:id>
+                        <con1:location>
+                            <con2:xpathText>.</con2:xpathText>
+                        </con1:location>
+                        <con1:expr>
+                            <con2:xqueryText>fn:concat('&lt;',fn:string(fn:prefix-from-QName(fn:node-name($requestPayload/*))),':',fn:data($operation),'Rs/>')</con2:xqueryText>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+            <con:stage id="_StageId-N53efad85.N42261052.0.17347194f4b.N7fc4" name="stg_Reply_Error">
+                <con:context/>
+                <con:actions>
+                    <con2:reply>
+                        <con2:id>_ActionId-N53efad85.N42261052.0.17347194f4b.N7fc3</con2:id>
+                    </con2:reply>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="PPN_ConsultarCedulas">
+                <con:request>request-N3f57fffc.N70e37b49.0.17344999327.N7f0a</con:request>
+                <con:response>response-N3f57fffc.N70e37b49.0.17344999327.N7f09</con:response>
+            </con:pipeline-node>
+            <con:route-node name="RN_ConsultarCedulas">
+                <con:context/>
+                <con:actions>
+                    <con3:route>
+                        <con2:id>_ActionId-N53efad85.N6763dbb0.0.173469d86d5.N7ff9</con2:id>
+                        <con3:service ref="CON_RegistraduriaNacional/WSConsulta/BusinessService/BS_WSConsultaV1.0" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con3:operation>consultarCedulas</con3:operation>
+                        <con3:outboundTransform/>
+                        <con3:responseTransform/>
+                    </con3:route>
+                </con:actions>
+            </con:route-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

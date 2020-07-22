@@ -1,0 +1,6 @@
+<view_states>
+   <function arity="7" name="func_headerResponse">
+      <source_tree_view last.visible.row="6" last.visible.path="/sourceRoot[[0]]/tipoError[[6]]" first.visible.path="/sourceRoot[[0]]/Codigo[[0]]" expanded.paths="" first.visible.row="0" selected.paths="/sourceRoot[[0]]"/>
+      <target_tree_view last.visible.row="8" last.visible.path="/TargetRoot[[0]]/headerResponse[[0]]/Error[[4]]/tipoError[[2]]" first.visible.path="/TargetRoot[[0]]/headerResponse[[0]]" expanded.paths="/TargetRoot[[0]]/headerResponse[[0]]&#xA;/TargetRoot[[0]]/headerResponse[[0]]/Error[[4]]" first.visible.row="0" selected.paths="/TargetRoot[[0]]/headerResponse[[0]]/Error[[4]]"/>
+   </function>
+</view_states>

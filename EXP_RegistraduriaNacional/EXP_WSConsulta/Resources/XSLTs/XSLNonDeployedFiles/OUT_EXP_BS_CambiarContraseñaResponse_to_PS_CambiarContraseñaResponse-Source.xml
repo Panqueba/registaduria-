@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cambiarContrasenaResponse xmlns="http://www.mindefensa.gov.co/xsd/Operacion/CambiarContraseña/V1.0">
+   <return>
+      <estadoCambioClave>
+         <numeroControl>1000</numeroControl>
+         <codError>codError2</codError>
+         <descripcionError>descripcionError3</descripcionError>
+         <fechaHoraConsulta>fechaHoraConsulta4</fechaHoraConsulta>
+      </estadoCambioClave>
+   </return>
+</cambiarContrasenaResponse>
